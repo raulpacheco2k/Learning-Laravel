@@ -43,26 +43,47 @@
                         <div class="row">
                             <div class="mb-3">
                                 <label class="form-label required" for="name">Nome</label>
-                                <input name="name" type="text" class="form-control" placeholder="Nome do produto" required maxlength="255">
+                                <input name="name" type="text" class="form-control" placeholder="Nome do produto"
+                                       required maxlength="255">
+                                @if ($errors->has('name'))
+                                    <div class="mt-3 alert alert-danger">
+                                        <p>{{ $errors->first('name') }}</p>
+                                    </div>
+                                @endif
                             </div>
                             <div class="mb-3">
                                 <label for="brand_id" class="form-label required">Marca</label>
-                                    <select name="brand_id" id="brand_id" class="form-select form-control" required>
-                                        <option value="" selected hidden>Selecione uma marca</option>
-                                        @foreach($brands as $brand)
-                                            <option value="{{$brand->id}}">{{$brand->name}}</option>
-                                        @endforeach
-                                    </select>
+                                <select name="brand_id" id="brand_id" class="form-select form-control" required>
+                                    <option value="" selected hidden>Selecione uma marca</option>
+                                    @foreach($brands as $brand)
+                                        <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('brand_id'))
+                                    <div class="mt-3 alert alert-danger">
+                                        <p>{{ $errors->first('brand_id') }}</p>
+                                    </div>
+                                @endif
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="stock">Estoque</label>
-                                    <input type="number" class="form-control" name="stock"
-                                           placeholder="Estoque do produto">
+                                <input type="number" class="form-control" name="stock"
+                                       placeholder="Estoque do produto">
+                                @if ($errors->has('stock'))
+                                    <div class="mt-3 alert alert-danger">
+                                        <p>{{ $errors->first('stock') }}</p>
+                                    </div>
+                                @endif
                             </div>
                             <div class="mb-3">
                                 <label class="form-label required" for="price">Preço</label>
-                                    <input type="number" class="form-control" name="price"
-                                           placeholder="Valor do produto" required>
+                                <input type="number" class="form-control" name="price"
+                                       placeholder="Valor do produto" required>
+                                @if ($errors->has('price'))
+                                    <div class="mt-3 alert alert-danger">
+                                        <p>{{ $errors->first('price') }}</p>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -70,8 +91,13 @@
                         <div class="row">
                             <div class="mb-3">
                                 <label class="form-label" for="description">Descrição</label>
-                                    <textarea class="form-control" name="description" rows="13"
-                                              placeholder="Descrição do produto"></textarea>
+                                <textarea class="form-control" name="description" rows="13"
+                                          placeholder="Descrição do produto"></textarea>
+                                @if ($errors->has('description'))
+                                    <div class="mt-3 alert alert-danger">
+                                        <p>{{ $errors->first('description') }}</p>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

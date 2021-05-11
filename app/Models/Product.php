@@ -14,6 +14,8 @@ class Product extends Model
     {
         return [
             'title' => 'required|max:255',
+            'slug' => 'required',
+            'brand_id' => 'required',
             'price' => 'required|max:255'
         ];
     }

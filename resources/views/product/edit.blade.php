@@ -55,6 +55,11 @@
                                            placeholder="Nome do produto"
                                            value="{{ $product->name }}">
                                 </label>
+                                @if ($errors->has('name'))
+                                    <div class="mt-3 alert alert-danger">
+                                        <p>{{ $errors->first('name') }}</p>
+                                    </div>
+                                @endif
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Marca</label>
@@ -64,6 +69,11 @@
                                         <option @if($brand->id == $product->brand_id) selected @endif value="{{$brand->id}}">{{ substr($brand->name, 0, 55) }}</option>
                                     @endforeach
                                 </select>
+                                @if ($errors->has('brand_id'))
+                                    <div class="mt-3 alert alert-danger">
+                                        <p>{{ $errors->first('brand_id') }}</p>
+                                    </div>
+                                @endif
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="stock">Estoque
@@ -71,6 +81,11 @@
                                            placeholder="Estoque do produto"
                                            value="{{ $product->stock }}">
                                 </label>
+                                @if ($errors->has('stock'))
+                                    <div class="mt-3 alert alert-danger">
+                                        <p>{{ $errors->first('stock') }}</p>
+                                    </div>
+                                @endif
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="price">Preço
@@ -78,6 +93,11 @@
                                            placeholder="Valor do produto"
                                            value="{{ $product->price }}">
                                 </label>
+                                @if ($errors->has('price'))
+                                    <div class="mt-3 alert alert-danger">
+                                        <p>{{ $errors->first('price') }}</p>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
