@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\ProductController;
+use \App\Http\Controllers\BrandController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,8 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-require __DIR__.'/auth.php';
+Route::view('/', 'index')->name('base')->middleware('auth');
+Route::resource('/produtos', ProductController::class)->middleware('auth');
+Route::resource('/marcas', BrandController::class)->middleware('auth');
+require __DIR__ . '/auth.php';
