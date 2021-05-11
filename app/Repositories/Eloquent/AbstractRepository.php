@@ -22,4 +22,9 @@ abstract class AbstractRepository
     {
         return $this->resolveModel()->find($id);
     }
+
+    public function insert($array)
+    {
+        return $this->resolveModel()->insert($array);
+    }
 }

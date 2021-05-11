@@ -37,7 +37,7 @@ class BrandController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BrandRequest $request)
+    public function store(BrandRequest $request, BrandRepositoryInterface $model)
     {
         $brand = [
             'name' => $request->name,
@@ -45,7 +45,7 @@ class BrandController extends Controller
             'description' => $request->description
         ];
 
-        Brand::insert($brand);
+        $model->insert($brand);
 
         return redirect(route('marcas.index'));
     }
