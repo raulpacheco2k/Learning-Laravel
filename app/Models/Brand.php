@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Brand extends Model
 {
     use HasFactory;
+
+    public static $rules = [
+        'name' => 'required|max:255',
+        'description' => 'required|max:255'
+    ];
 }
