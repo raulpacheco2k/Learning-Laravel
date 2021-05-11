@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Brand;
 use App\Models\Product;
+use App\Repositories\Contracts\BrandRepositoryInterface;
+use App\Repositories\Contracts\ProductRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -14,10 +15,10 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ProductRepositoryInterface $product, BrandRepositoryInterface $brand)
     {
-        $products = Product::all();
-        $brands = Brand::all();
+        $products = $product->all();
+        $brands = $brand->all();
         return view('product.index')->with(['products' => $products, 'brands' => $brands]);
     }
 
@@ -26,9 +27,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(BrandRepositoryInterface $model)
     {
-        $brands = Brand::all();
+        $brands = $model->all();
         return view('product.create')->with('brands', $brands);
     }
 
@@ -38,7 +39,7 @@ class ProductController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, ProductRepositoryInterface $model)
     {
         $product = [
             'name' => $request->name,
@@ -49,7 +50,7 @@ class ProductController extends Controller
             'price' => $request->price
         ];
 
-        Product::create($product);
+        $model->insert($product);
 
         return redirect(route('produtos.index'));
     }
@@ -60,10 +61,10 @@ class ProductController extends Controller
      * @param Product $product
      * @return \Illuminate\Http\Response
      */
-    public function show($product)
+    public function show(ProductRepositoryInterface $product, $id, BrandRepositoryInterface $brand)
     {
-        $product = Product::find($product);
-        $brand = Brand::find($product->brand_id)->name;
+        $product = $product->find($id);
+        $brand = $brand->find($product->brand_id)->name;
 
         return view('product.show')->with(['product' => $product, 'brand' => $brand]);
     }
@@ -74,10 +75,10 @@ class ProductController extends Controller
      * @param Product $product
      * @return \Illuminate\Http\Response
      */
-    public function edit($product)
+    public function edit(ProductRepositoryInterface $product, $id, BrandRepositoryInterface $brand)
     {
-        $product = Product::find($product);
-        $brands = Brand::all();
+        $product = $product->find($id);
+        $brands = $brand->all();
 
         return view('product.edit')->with(['product' => $product, 'brands' => $brands]);
     }
@@ -89,9 +90,9 @@ class ProductController extends Controller
      * @param Product $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $product)
+    public function update(Request $request, $id, ProductRepositoryInterface $product)
     {
-        $product = Product::find($product);
+        $product = $product->find($id);
 
         $product->name = $request->name;
         $product->slug = Str::slug($request->name);
@@ -110,9 +111,9 @@ class ProductController extends Controller
      * @param Product $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy($product)
+    public function destroy(ProductRepositoryInterface $product, $id)
     {
-        $product = Product::find($product);
+        $product = $product->find($id);
         $product->delete();
         return redirect(route('produtos.index'));
     }
