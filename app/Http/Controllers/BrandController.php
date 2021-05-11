@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BrandRequest;
 use App\Models\Brand;
+use App\Repositories\Contracts\BrandRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use function PHPUnit\Framework\directoryExists;
 
 class BrandController extends Controller
 {
@@ -14,9 +15,9 @@ class BrandController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(BrandRepositoryInterface $model)
     {
-        $brands = Brand::all();
+        $brands = $model->all();
         return view('brand.index')->with('brands', $brands);
     }
 
@@ -36,7 +37,7 @@ class BrandController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BrandRequest $request)
     {
         $brand = [
             'name' => $request->name,
@@ -55,9 +56,9 @@ class BrandController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(BrandRepositoryInterface $model, $id)
     {
-        $brand = Brand::find($id);
+        $brand = $model->find($id);
 
         return view('brand.show')->with('brand', $brand);
     }
@@ -68,9 +69,9 @@ class BrandController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(BrandRepositoryInterface $model, $id)
     {
-        $brand = Brand::find($id);
+        $brand = $model->find($id);
         return view('brand.edit')->with('brand', $brand);
     }
 
@@ -81,9 +82,9 @@ class BrandController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, BrandRepositoryInterface $model, $id)
     {
-        $brand = Brand::find($id);
+        $brand = $model->find($id);
 
         $brand->name = $request->name;
         $brand->slug = Str::slug($request->slug);
@@ -99,10 +100,10 @@ class BrandController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(BrandRepositoryInterface $model, $id)
     {
 
-        $brand = Brand::find($id);
+        $brand = $model->find($id);
 
         $brand->delete();
 

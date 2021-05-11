@@ -45,14 +45,25 @@
                             <label class="form-label required" for="name">Nome</label>
                             <input type="text" class="form-control" name="name" placeholder="Nome da marca" required
                                    maxlength="255">
+                            @if ($errors->has('name'))
+                                <div class="mt-3 alert alert-danger">
+                                    <p>{{ $errors->first('name') }}</p>
+                                </div>
+                            @endif
                         </div>
                     </div>
                     <div class="row">
                         <div class="mb-3">
                             <label class="form-label" for="description">Descrição</label>
                             <textarea class="form-control" name="description" rows="9"
-                                      placeholder="Descrição da marca"></textarea>
+                                      placeholder="Descrição da marca" maxlength="255"></textarea>
+                            @if ($errors->has('description'))
+                                <div class="mt-3 alert alert-danger">
+                                    <p>{{ $errors->first('description') }}</p>
+                                </div>
+                            @endif
                         </div>
+
                     </div>
                 </div>
             </div>
