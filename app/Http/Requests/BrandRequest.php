@@ -24,6 +24,6 @@ class BrandRequest extends FormRequest
      */
     public function rules()
     {
-        return Brand::$rules;
+        return Brand::rules();
     }
 }
