@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Product;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class ProductRequest extends FormRequest
 {
@@ -13,7 +15,12 @@ class ProductRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge(['slug' => Str::slug($this->name)]);
     }
 
     /**
@@ -23,8 +30,6 @@ class ProductRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        return Product::rules();
     }
 }

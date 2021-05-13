@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use App\Repositories\Contracts\BrandRepositoryInterface;
 use App\Repositories\Contracts\ProductRepositoryInterface;
@@ -39,7 +40,7 @@ class ProductController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, ProductRepositoryInterface $model)
+    public function store(ProductRequest $request, ProductRepositoryInterface $model)
     {
         $product = [
             'name' => $request->name,

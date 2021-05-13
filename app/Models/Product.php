@@ -10,17 +10,18 @@ class Product extends Model
 
     protected $fillable = ['name', 'slug', 'brand_id', 'description', 'stock', 'price'];
 
-    public function rules()
+    public static function rules()
     {
         return [
-            'title' => 'required|max:255',
+            'name' => 'required|max:255',
             'slug' => 'required',
             'brand_id' => 'required',
-            'price' => 'required|max:255'
+            'price' => 'required|numeric'
         ];
     }
 
-    public function getFormattedPriceAttribute(){
+    public function getFormattedPriceAttribute()
+    {
         return number_format($this->price, 2, ',', '.');
     }
 

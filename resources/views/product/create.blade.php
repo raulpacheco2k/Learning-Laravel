@@ -78,7 +78,8 @@
                             <div class="mb-3">
                                 <label class="form-label required" for="price">Preço</label>
                                 <input type="number" class="form-control" name="price"
-                                       placeholder="Valor do produto" required>
+                                       placeholder="Valor do produto" required
+                                       min="0" max="2147483647" maxlength="2" step="1">
                                 @if ($errors->has('price'))
                                     <div class="mt-3 alert alert-danger">
                                         <p>{{ $errors->first('price') }}</p>
