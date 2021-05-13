@@ -1,12 +1,10 @@
 <!doctype html>
-<html lang="pt-br" dir="ltr">
+<html lang="{{config('app.locale')}}" dir="ltr">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Dashboard</title>
-    <script src="https://unpkg.com/@tabler/core@latest/dist/js/tabler.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/@tabler/core@latest/dist/css/tabler.min.css">
+    @include('web.backoffice.layout.head.meta')
+    @include('web.backoffice.layout.head.title')
+    @include('web.backoffice.layout.head.css')
+    @include('web.backoffice.layout.head.js')
 </head>
 <body class="antialiased" data-new-gr-c-s-check-loaded="14.1009.0" data-gr-ext-installed="">
 <div class="wrapper">
@@ -104,42 +102,8 @@
             </div>
         </div>
 
-        <footer class="footer footer-transparent d-print-none">
-            <div class="container">
-                <div class="row text-center align-items-center flex-row-reverse">
-                    <div class="col-lg-auto ms-lg-auto">
-                        <ul class="list-inline list-inline-dots mb-0">
-                            <li class="list-inline-item">
-                                <p target="_blank" class="link-secondary"
-                                   rel="noopener">
-                                    Make with
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                         class="icon text-pink icon-filled icon-inline" width="24" height="24"
-                                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                         stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                        <path d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
-                                    </svg>
-                                    by Raul Pacheco
-                                </p>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-12 col-lg-auto mt-3 mt-lg-0">
-                        <ul class="list-inline list-inline-dots mb-0">
-                            <li class="list-inline-item">
-                                Copyright © 2021
-                                <a href="." class="link-secondary">Raul Pacheco</a>.
-                                Todos os direitos reservados.
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </footer>
-
+        @include('web.backoffice.layout.footer')
     </div>
-
 </div>
 </body>
 </html>

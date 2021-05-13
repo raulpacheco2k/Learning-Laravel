@@ -1,4 +1,6 @@
-@extends('base')
+@extends('web.backoffice.layout.base')
+
+@section('title', 'Criação de produto')
 
 @section('submenu')
     <div class="row align-items-center">

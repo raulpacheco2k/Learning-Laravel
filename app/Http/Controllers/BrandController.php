@@ -18,7 +18,7 @@ class BrandController extends Controller
     public function index(BrandRepositoryInterface $model)
     {
         $brands = $model->all();
-        return view('brand.index')->with('brands', $brands);
+        return view('web.backoffice.sections.brand.index')->with('brands', $brands);
     }
 
     /**
@@ -28,7 +28,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        return view('brand.create');
+        return view('web.backoffice.sections.brand.create');
     }
 
     /**
@@ -60,7 +60,7 @@ class BrandController extends Controller
     {
         $brand = $model->find($id);
 
-        return view('brand.show')->with('brand', $brand);
+        return view('web.backoffice.sections.brand.show')->with('brand', $brand);
     }
 
     /**
@@ -72,7 +72,7 @@ class BrandController extends Controller
     public function edit(BrandRepositoryInterface $model, $id)
     {
         $brand = $model->find($id);
-        return view('brand.edit')->with('brand', $brand);
+        return view('web.backoffice.sections.brand.edit')->with('brand', $brand);
     }
 
     /**
