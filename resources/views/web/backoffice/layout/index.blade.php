@@ -1,6 +1,6 @@
 @extends('web.backoffice.layout.base')
 
-@section('title', 'Home')
+@section('title', 'Dashboard')
 
 @section('content')
     <div class="row justify-content-center">
