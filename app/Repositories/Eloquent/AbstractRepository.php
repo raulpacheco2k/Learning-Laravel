@@ -27,4 +27,9 @@ abstract class AbstractRepository
     {
         return $this->resolveModel()->insert($array);
     }
+
+    public function delete($id)
+    {
+        return $this->resolveModel()->find($id)->delete($id);
+    }
 }

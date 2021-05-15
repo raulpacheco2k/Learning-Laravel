@@ -103,9 +103,7 @@ class BrandController extends Controller
     public function destroy(BrandRepositoryInterface $model, $id)
     {
 
-        $brand = $model->find($id);
-
-        $brand->delete();
+        $model->delete($id);
 
         return redirect(route('marcas.index'));
     }

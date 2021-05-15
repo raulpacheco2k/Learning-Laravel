@@ -114,8 +114,7 @@ class ProductController extends Controller
      */
     public function destroy(ProductRepositoryInterface $product, $id)
     {
-        $product = $product->find($id);
-        $product->delete();
+        $product->delete($id);
         return redirect(route('produtos.index'));
     }
 }
