@@ -20,7 +20,7 @@ class ProductController extends Controller
     {
         $products = $product->all();
         $brands = $brand->all();
-        return view('web.backoffice.sections.product.index')->with(['products' => $products, 'brands' => $brands]);
+        return view('backoffice.sections.product.index')->with(['products' => $products, 'brands' => $brands]);
     }
 
     /**
@@ -31,7 +31,7 @@ class ProductController extends Controller
     public function create(BrandRepositoryInterface $model)
     {
         $brands = $model->all();
-        return view('web.backoffice.sections.product.create')->with('brands', $brands);
+        return view('backoffice.sections.product.create')->with('brands', $brands);
     }
 
     /**
@@ -53,7 +53,7 @@ class ProductController extends Controller
 
         $model->insert($product);
 
-        return redirect(route('produtos.index'));
+        return redirect(route('products.index'));
     }
 
     /**
@@ -67,7 +67,7 @@ class ProductController extends Controller
         $product = $product->find($id);
         $brand = $brand->find($product->brand_id)->name;
 
-        return view('web.backoffice.sections.product.show')->with(['product' => $product, 'brand' => $brand]);
+        return view('backoffice.sections.product.show')->with(['product' => $product, 'brand' => $brand]);
     }
 
     /**
@@ -81,7 +81,7 @@ class ProductController extends Controller
         $product = $product->find($id);
         $brands = $brand->all();
 
-        return view('web.backoffice.sections.product.edit')->with(['product' => $product, 'brands' => $brands]);
+        return view('backoffice.sections.product.edit')->with(['product' => $product, 'brands' => $brands]);
     }
 
     /**
@@ -103,7 +103,7 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->save();
 
-        return redirect(route('produtos.index'));
+        return redirect(route('products.index'));
     }
 
     /**
@@ -115,6 +115,6 @@ class ProductController extends Controller
     public function destroy(ProductRepositoryInterface $product, $id)
     {
         $product->delete($id);
-        return redirect(route('produtos.index'));
+        return redirect(route('products.index'));
     }
 }

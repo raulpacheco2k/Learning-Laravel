@@ -19,7 +19,7 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('web.backoffice.sections.auth.register');
+        return view('backoffice.sections.auth.register');
     }
 
     /**

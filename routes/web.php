@@ -15,7 +15,7 @@ use \App\Http\Controllers\BrandController;
 |
 */
 
-Route::view('/', 'web.backoffice.layout.index')->name('base')->middleware('auth');
-Route::resource('/produtos', ProductController::class)->middleware('auth');
-Route::resource('/marcas', BrandController::class)->middleware('auth');
+Route::view('/', 'backoffice.layout.index')->name('base')->middleware('auth');
+Route::resource('/products', ProductController::class)->middleware('auth');
+Route::resource('/brands', BrandController::class)->middleware('auth');
 require __DIR__ . '/auth.php';

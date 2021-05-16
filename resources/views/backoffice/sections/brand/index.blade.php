@@ -1,4 +1,4 @@
-@extends('web.backoffice.layout.base')
+@extends('backoffice.layout.base')
 
 @section('title', 'Marcas')
 
@@ -11,7 +11,7 @@
         </div>
         <div class="col-auto ms-auto d-print-none">
             <div class="btn-list">
-                <a href="{{ route('marcas.create') }}" class="btn btn-primary d-none d-sm-inline-block">
+                <a href="{{ route('brands.create') }}" class="btn btn-primary d-none d-sm-inline-block">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                          stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                          stroke-linejoin="round">
@@ -21,7 +21,7 @@
                     </svg>
                     Criar marca
                 </a>
-                <a href="{{ route('marcas.create') }}" class="btn btn-primary d-sm-none btn-icon">
+                <a href="{{ route('brands.create') }}" class="btn btn-primary d-sm-none btn-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                          stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                          stroke-linejoin="round">
@@ -38,7 +38,7 @@
 @section('content')
     <div class="col-12">
         <div class="card">
-            <div class="">
+            <div class="table-responsive">
                 <table class="table card-table table-vcenter text-nowrap datatable">
                     @if(count($brands) == 0)
                         <div class="empty">
@@ -47,7 +47,7 @@
                                 Tente ajustar seu filtro para encontrar o que procura ou então crie uma marca.
                             </p>
                             <div class="empty-action">
-                                <a href="{{ route('marcas.create') }}" class="btn btn-primary">
+                                <a href="{{ route('brands.create') }}" class="btn btn-primary">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                          viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                          stroke-linecap="round" stroke-linejoin="round">
@@ -90,7 +90,7 @@
                                       data-bs-toggle="dropdown">Ações</button>
                               <div class="dropdown-menu dropdown-menu-end">
 
-                                <a class="dropdown-item" href="{{ route('marcas.show', $brand->id) }}">
+                                <a class="dropdown-item" href="{{ route('brands.show', $brand->id) }}">
                                   Visualizar
                                 </a>
                                       <a href="#" class="dropdown-item" data-bs-toggle="modal"
@@ -124,7 +124,7 @@
                                                             Cancel
                                                         </a></div>
                                                     <div class="col">
-                                                        <form method="post" action="{{ route('marcas.destroy', $brand->id) }}">
+                                                        <form method="post" action="{{ route('brands.destroy', $brand->id) }}">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="btn btn-danger w-100">Deletar</button>

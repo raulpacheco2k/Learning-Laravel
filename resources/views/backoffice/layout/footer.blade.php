@@ -23,7 +23,7 @@
                 <ul class="list-inline list-inline-dots mb-0">
                     <li class="list-inline-item">
                         Copyright © 2021
-                        <a href="../../.." class="link-secondary">Raul Pacheco</a>.
+                        <a href="../.." class="link-secondary">Raul Pacheco</a>.
                         Todos os direitos reservados.
                     </li>
                 </ul>

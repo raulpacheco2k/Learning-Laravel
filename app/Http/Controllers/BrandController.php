@@ -18,7 +18,7 @@ class BrandController extends Controller
     public function index(BrandRepositoryInterface $model)
     {
         $brands = $model->all();
-        return view('web.backoffice.sections.brand.index')->with('brands', $brands);
+        return view('backoffice.sections.brand.index')->with('brands', $brands);
     }
 
     /**
@@ -28,7 +28,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        return view('web.backoffice.sections.brand.create');
+        return view('backoffice.sections.brand.create');
     }
 
     /**
@@ -47,7 +47,7 @@ class BrandController extends Controller
 
         $model->insert($brand);
 
-        return redirect(route('marcas.index'));
+        return redirect(route('brands.index'));
     }
 
     /**
@@ -60,7 +60,7 @@ class BrandController extends Controller
     {
         $brand = $model->find($id);
 
-        return view('web.backoffice.sections.brand.show')->with('brand', $brand);
+        return view('backoffice.sections.brand.show')->with('brand', $brand);
     }
 
     /**
@@ -72,7 +72,7 @@ class BrandController extends Controller
     public function edit(BrandRepositoryInterface $model, $id)
     {
         $brand = $model->find($id);
-        return view('web.backoffice.sections.brand.edit')->with('brand', $brand);
+        return view('backoffice.sections.brand.edit')->with('brand', $brand);
     }
 
     /**
@@ -91,7 +91,7 @@ class BrandController extends Controller
         $brand->description = $request->description;
         $brand->save();
 
-        return redirect(route('marcas.index'));
+        return redirect(route('brands.index'));
     }
 
     /**
@@ -105,6 +105,6 @@ class BrandController extends Controller
 
         $model->delete($id);
 
-        return redirect(route('marcas.index'));
+        return redirect(route('brands.index'));
     }
 }

@@ -1,4 +1,4 @@
-@extends('web.backoffice.layout.base')
+@extends('backoffice.layout.base')
 
 @section('title', 'Dashboard')
 

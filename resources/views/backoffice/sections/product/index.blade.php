@@ -1,4 +1,4 @@
-@extends('web.backoffice.layout.base')
+@extends('backoffice.layout.base')
 
 @section('title', 'Produtos')
 
@@ -10,7 +10,7 @@
         </div>
         <div class="col-auto ms-auto d-print-none">
             <div class="btn-list">
-                <a href="{{ route('produtos.create') }}" class="btn btn-primary d-none d-sm-inline-block">
+                <a href="{{ route('products.create') }}" class="btn btn-primary d-none d-sm-inline-block">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                          stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                          stroke-linejoin="round">
@@ -20,7 +20,7 @@
                     </svg>
                     Criar produto
                 </a>
-                <a href="{{ route('produtos.create') }}" class="btn btn-primary d-sm-none btn-icon">
+                <a href="{{ route('products.create') }}" class="btn btn-primary d-sm-none btn-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                          stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                          stroke-linejoin="round">
@@ -46,7 +46,7 @@
                                 Tente ajustar seu filtro para encontrar o que procura ou então crie um produto.
                             </p>
                             <div class="empty-action">
-                                <a href="{{ route('produtos.create') }}" class="btn btn-primary">
+                                <a href="{{ route('products.create') }}" class="btn btn-primary">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                          viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                          stroke-linecap="round" stroke-linejoin="round">
@@ -93,10 +93,10 @@
                                       data-bs-toggle="dropdown">Ações</button>
                               <div class="dropdown-menu dropdown-menu-end">
 
-                                <a class="dropdown-item" href="{{ route('produtos.show', $product) }}">
+                                <a class="dropdown-item" href="{{ route('products.show', $product) }}">
                                   Visualizar
                                 </a>
-                                  <form method="post" action="{{ route('produtos.destroy', $product) }}">
+                                  <form method="post" action="{{ route('products.destroy', $product) }}">
                                         @csrf
                                       @method('DELETE')
                                       <button type="submit" class="dropdown-item">Deletar</button>

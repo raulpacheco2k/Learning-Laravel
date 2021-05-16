@@ -1,4 +1,4 @@
-@extends('web.backoffice.layout.base')
+@extends('backoffice.layout.base')
 
 @section('title', 'Criação de marca')
 
@@ -11,7 +11,7 @@
         <div class="col-auto ms-auto d-print-none">
             <div class="btn-list">
                 <div>
-                    <a href="{{ route('marcas.index') }}" class="btn btn-light d-none d-sm-inline-block">
+                    <a href="{{ route('brands.index') }}" class="btn btn-light d-none d-sm-inline-block">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                              stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                              stroke-linejoin="round">
@@ -20,7 +20,7 @@
                         </svg>
                         Voltar para listagem
                     </a>
-                    <a href="{{ route('marcas.index') }}" class="btn btn-light d-sm-none btn-icon"
+                    <a href="{{ route('brands.index') }}" class="btn btn-light d-sm-none btn-icon"
                        aria-label="Create new report">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                              stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -38,44 +38,31 @@
 
 @section('content')
     <div class="col-12">
-        <form action="{{ route('marcas.store') }}" method="post" class="card">
-            @csrf
+        {{ Form::open(['route' => 'brands.store', 'class' => 'card']) }}
             <div class="card-body">
                 <div class="row">
                     <div class="row">
                         <div class="mb-3">
-                            <label class="form-label required" for="name">Nome</label>
-                            <input type="text" class="form-control" name="name" placeholder="Nome da marca" required
-                                   maxlength="255">
-                            @if ($errors->has('name'))
-                                <div class="mt-3 alert alert-danger">
-                                    <p>{{ $errors->first('name') }}</p>
-                                </div>
-                            @endif
+                            {{ Form::label('name', 'Name', ['class' => 'form-label required']) }}
+                            {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nome da marca', 'maxlength' => '255', 'required']) }}
+                            <x-validate-field field="name"/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="mb-3">
-                            <label class="form-label" for="description">Descrição</label>
-                            <textarea class="form-control" name="description" rows="9"
-                                      placeholder="Descrição da marca" maxlength="255"></textarea>
-                            @if ($errors->has('description'))
-                                <div class="mt-3 alert alert-danger">
-                                    <p>{{ $errors->first('description') }}</p>
-                                </div>
-                            @endif
+                            {{ Form::label('description', 'Descrição', ['class' => 'form-label required']) }}
+                            {{ Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => 'Descrição da marca', 'maxlength' => '255', 'rows' => '9' ,'required']) }}
+                            <x-validate-field field="description"/>
                         </div>
-
                     </div>
                 </div>
             </div>
             <div class="card-footer text-end">
                 <div class="d-flex">
-                    <a href="{{ route('marcas.index') }}" class="btn btn-link">Cancelar</a>
-
+                    <a href="{{ route('brands.index') }}" class="btn btn-link">Cancelar</a>
                     <button type="submit" class="btn btn-primary ms-auto">Salvar</button>
                 </div>
             </div>
-        </form>
+        {{ Form::close() }}
     </div>
 @endsection

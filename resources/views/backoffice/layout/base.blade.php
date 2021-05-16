@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="{{config('app.locale')}}" dir="ltr">
 <head>
-    @include('web.backoffice.layout.head.meta')
-    @include('web.backoffice.layout.head.title')
-    @include('web.backoffice.layout.head.css')
-    @include('web.backoffice.layout.head.js')
+    @include('backoffice.layout.head.meta')
+    @include('backoffice.layout.head.title')
+    @include('backoffice.layout.head.css')
+    @include('backoffice.layout.head.js')
 </head>
 <body class="antialiased" data-new-gr-c-s-check-loaded="14.1009.0" data-gr-ext-installed="">
 <div class="wrapper">
@@ -77,8 +77,8 @@
                             <div class="dropdown-menu">
                                 <div class="dropdown-menu-columns">
                                     <div class="dropdown-menu-column">
-                                        <a class="dropdown-item" href="{{ route('produtos.index') }}">Produtos</a>
-                                        <a class="dropdown-item" href="{{ route('marcas.index') }}">Marcas</a>
+                                        <a class="dropdown-item" href="{{ route('products.index') }}">Produtos</a>
+                                        <a class="dropdown-item" href="{{ route('brands.index') }}">Marcas</a>
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@
             </div>
         </div>
 
-        @include('web.backoffice.layout.footer')
+        @include('backoffice.layout.footer')
     </div>
 </div>
 </body>
