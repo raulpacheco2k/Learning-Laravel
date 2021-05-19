@@ -42,14 +42,16 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request, ProductRepositoryInterface $model)
     {
-        $product = [
-            'name' => $request->name,
-            'slug' => Str::slug($request->name),
-            'description' => $request->description,
-            'brand_id' => $request->brand_id,
-            'stock' => $request->stock,
-            'price' => $request->price
-        ];
+        $product = new Product(
+            [
+                'name' => $request->get('name'),
+                'slug' => Str::slug($request->get('name')),
+                'description' => $request->get('description'),
+                'brand_id' => $request->get('brand_id'),
+                'stock' => $request->get('stock'),
+                'price' => $request->get('price')
+            ]
+        );
 
         $model->insert($product);
 
@@ -62,12 +64,12 @@ class ProductController extends Controller
      * @param Product $product
      * @return \Illuminate\Http\Response
      */
-    public function show(ProductRepositoryInterface $product, $id, BrandRepositoryInterface $brand)
+    public function show(ProductRepositoryInterface $product, $id, BrandRepositoryInterface $brands)
     {
         $product = $product->find($id);
-        $brand = $brand->find($product->brand_id)->name;
+        $brands = $brands->all();
 
-        return view('backoffice.sections.product.show')->with(['product' => $product, 'brand' => $brand]);
+        return view('backoffice.sections.product.show')->with(['product' => $product, 'brands' => $brands]);
     }
 
     /**

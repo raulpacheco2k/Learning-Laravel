@@ -39,11 +39,13 @@ class BrandController extends Controller
      */
     public function store(BrandRequest $request, BrandRepositoryInterface $model)
     {
-        $brand = [
-            'name' => $request->name,
-            'slug' => Str::slug($request->name),
-            'description' => $request->description
-        ];
+        $brand = new Brand(
+            [
+                'name' => $request->get('name'),
+                'slug' => Str::slug($request->get('name')),
+                'description' => $request->get('description')
+            ]
+        );
 
         $model->insert($brand);
 
@@ -102,7 +104,6 @@ class BrandController extends Controller
      */
     public function destroy(BrandRepositoryInterface $model, $id)
     {
-
         $model->delete($id);
 
         return redirect(route('brands.index'));

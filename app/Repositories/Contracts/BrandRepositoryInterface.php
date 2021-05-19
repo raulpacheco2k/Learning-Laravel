@@ -6,11 +6,4 @@ namespace App\Repositories\Contracts;
 
 interface BrandRepositoryInterface
 {
-    public function all();
-
-    public function find($id);
-
-    public function insert($array);
-
-    public function delete($id);
 }

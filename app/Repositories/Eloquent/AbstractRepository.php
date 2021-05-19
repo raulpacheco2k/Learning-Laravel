@@ -4,6 +4,8 @@
 namespace App\Repositories\Eloquent;
 
 
+use Illuminate\Database\Eloquent\Model;
+
 abstract class AbstractRepository
 {
     abstract public function model();
@@ -18,17 +20,17 @@ abstract class AbstractRepository
         return $this->resolveModel()->all();
     }
 
-    public function find($id)
+    public function find(int $id)
     {
         return $this->resolveModel()->find($id);
     }
 
-    public function insert($array)
+    public function insert(Model $object)
     {
-        return $this->resolveModel()->insert($array);
+        return $this->resolveModel()->insert($object->toArray());
     }
 
-    public function delete($id)
+    public function delete(int $id)
     {
         return $this->resolveModel()->find($id)->delete($id);
     }
