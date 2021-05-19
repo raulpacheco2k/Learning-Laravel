@@ -1,4 +1,5 @@
 @extends('backoffice.layout.base')
+@include('backoffice.sections.product.fields', ['disabled' => 'disabled'])
 
 @section('title', 'Visualização de produto')
 
@@ -69,32 +70,26 @@
                 <div class="col-xl-6">
                     <div class="row">
                         <div class="mb-3">
-                            {{ Form::label('name', 'Nome', ['class' => 'form-label required'])  }}
-                            {{ Form::text('name', $product->name, ['class' => 'form-control', 'placeholder' => 'Nome do produto', 'required', 'readonly']) }}
+                            @yield('name')
                         </div>
                         <div class="mb-3">
-                            {{ Form::label('brand_id', 'Marca', ['class' => 'form-label required'])  }}
-                            {{ Form::text('brand_id', $brand, ['class'=>'form-select form-control', 'required', 'readonly']) }}
+                            @yield('brand_id')
                         </div>
                         <div class="mb-3">
-                            {{ Form::label('stock', 'Estoque', ['class' => 'form-label'])  }}
-                            {{ Form::number('stock', $product->stock, ['class' => 'form-control', 'placeholder' => 'Estoque do produto', 'readonly'] ) }}
+                            @yield('stock')
                         </div>
                         <div class="mb-3">
-                            {{ Form::label('price', 'Preço', ['class' => 'form-label required'])  }}
-                            {{ Form::number('price', $product->price, ['class' => 'form-control', 'placeholder' => 'Valor do produto', 'required', 'max' => '2147483647', 'readonly'] ) }}
+                            @yield('price')
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-6">
                     <div class="row">
                         <div class="mb-3">
-                            {{ Form::label('description', 'Descrição', ['class' => 'form-label'])  }}
-                            {{ Form::textarea('description', $product->description, ['class' => 'form-control', 'rows' => '13', 'placeholder' => 'Descrição do produto', 'readonly']) }}
+                            @yield('description')
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="card-footer text-end">

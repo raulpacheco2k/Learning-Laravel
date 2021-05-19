@@ -1,4 +1,5 @@
 @extends('backoffice.layout.base')
+@include('backoffice.sections.product.fields')
 
 @section('title', 'Criação de produto')
 
@@ -43,33 +44,23 @@
                 <div class="col-xl-6">
                     <div class="row">
                         <div class="mb-3">
-                            {{ Form::label('name', 'Nome', ['class' => 'form-label required'])  }}
-                            {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nome do produto', 'required']) }}
-                            <x-validate-field field="name"/>
+                            @yield('name')
                         </div>
                         <div class="mb-3">
-                            {{ Form::label('brand_id', 'Marca', ['class' => 'form-label required'])  }}
-                            {{ Form::select('brand_id', $brands->pluck('name', 'id'), null, ['class'=>'form-select form-control', 'required']) }}
-                            <x-validate-field field="brand_id"/>
+                            @yield('brand_id')
                         </div>
                         <div class="mb-3">
-                            {{ Form::label('stock', 'Estoque', ['class' => 'form-label'])  }}
-                            {{ Form::number('stock', null, ['class' => 'form-control', 'placeholder' => 'Estoque do produto'] ) }}
-                            <x-validate-field field="stock"/>
+                            @yield('stock')
                         </div>
                         <div class="mb-3">
-                            {{ Form::label('price', 'Preço', ['class' => 'form-label required'])  }}
-                            {{ Form::number('price', null, ['class' => 'form-control', 'placeholder' => 'Valor do produto', 'required', 'max' => '2147483647'] ) }}
-                            <x-validate-field field="price"/>
+                            @yield('price')
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-6">
                     <div class="row">
                         <div class="mb-3">
-                            {{ Form::label('description', 'Descrição', ['class' => 'form-label'])  }}
-                            {{ Form::textarea('description', null, ['class' => 'form-control', 'rows' => '13', 'placeholder' => 'Descrição do produto']) }}
-                            <x-validate-field field="description"/>
+                            @yield('description')
                         </div>
                     </div>
                 </div>

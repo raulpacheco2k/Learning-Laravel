@@ -37,7 +37,7 @@
 @section('content')
     <div class="col-12">
         <div class="card">
-            <div class="">
+            <div class="table-responsive">
                 <table class="table card-table table-vcenter text-nowrap datatable">
                     @if(count($products) == 0)
                         <div class="empty">
