@@ -97,12 +97,12 @@ class ProductController extends Controller
     {
         $product = $product->find($id);
 
-        $product->name = $request->name;
-        $product->slug = Str::slug($request->name);
-        $product->description = $request->description;
-        $product->brand_id = $request->brand_id;
-        $product->stock = $request->stock;
-        $product->price = $request->price;
+        $product->name = $request->get('name');
+        $product->slug = Str::slug($request->get('name'));
+        $product->description = $request->get('description');
+        $product->brand_id = $request->get('brand_id');
+        $product->stock = $request->get('stock');
+        $product->price = $request->get('price');
         $product->save();
 
         return redirect(route('products.index'));
