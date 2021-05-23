@@ -28,6 +28,16 @@ class Product extends Model
         return number_format($this->price, 2, ',', '.');
     }
 
+    public function getCreatedAttribute(): string
+    {
+        return date('H:i d/m/Y ', strtotime($this->created_at));
+    }
+
+    public function getUpdatedAttribute(): string
+    {
+        return date('H:i d/m/Y ', strtotime($this->created_at));
+    }
+
     public function brand()
     {
         return $this->hasOne(Brand::class, 'id', 'brand_id');
