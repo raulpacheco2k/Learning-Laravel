@@ -18,4 +18,9 @@ class Brand extends Model
             'description' => 'required|max:255'
         ];
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'brand_id', 'id');
+    }
 }
