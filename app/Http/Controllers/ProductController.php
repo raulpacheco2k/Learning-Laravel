@@ -53,7 +53,7 @@ class ProductController extends Controller
             ]
         );
 
-        $model->insert($product);
+        $model->create($product);
 
         return redirect(route('products.index'));
     }

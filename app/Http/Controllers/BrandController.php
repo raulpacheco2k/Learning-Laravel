@@ -47,7 +47,7 @@ class BrandController extends Controller
             ]
         );
 
-        $model->insert($brand);
+        $model->create($brand);
 
         return redirect(route('brands.index'));
     }

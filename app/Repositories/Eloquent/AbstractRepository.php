@@ -25,9 +25,9 @@ abstract class AbstractRepository
         return $this->resolveModel()->find($id);
     }
 
-    public function insert(Model $object)
+    public function create(Model $object)
     {
-        return $this->resolveModel()->insert($object->toArray());
+        return $this->resolveModel()->create($object->toArray());
     }
 
     public function delete(int $id)
