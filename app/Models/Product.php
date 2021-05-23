@@ -25,4 +25,8 @@ class Product extends Model
         return number_format($this->price, 2, ',', '.');
     }
 
+    public function brand()
+    {
+        return $this->hasOne(Brand::class, 'id', 'brand_id');
+    }
 }
