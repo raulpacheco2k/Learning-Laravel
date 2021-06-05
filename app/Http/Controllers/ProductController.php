@@ -49,7 +49,8 @@ class ProductController extends Controller
                 'description' => $request->get('description'),
                 'brand_id' => $request->get('brand_id'),
                 'stock' => $request->get('stock'),
-                'price' => $request->get('price')
+                'price' => $request->get('price'),
+                'image' => $request->file('image')->store('products')
             ]
         );
 
@@ -103,6 +104,7 @@ class ProductController extends Controller
         $product->brand_id = $request->get('brand_id');
         $product->stock = $request->get('stock');
         $product->price = $request->get('price');
+        $product->image = $request->file('image')->store('products');
         $product->save();
 
         return redirect(route('products.index'));

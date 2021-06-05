@@ -39,7 +39,7 @@
 
 @section('content')
     <div class="col-12">
-        {{ Form::open(['route' => ['products.update', $product->id], 'method' => 'patch' ,'class' => 'card'])}}
+        {{ Form::open(['route' => ['products.update', $product->id], 'method' => 'patch' ,'class' => 'card', 'enctype' => 'multipart/form-data', 'autocomplete' => 'off'])}}
         <div class="card-body">
             <div class="row">
                 <div class="col-xl-6">
@@ -60,6 +60,9 @@
                 </div>
                 <div class="col-xl-6">
                     <div class="row">
+                        <div class="mb-3">
+                            @yield('image')
+                        </div>
                         <div class="mb-3">
                             @yield('description')
                         </div>

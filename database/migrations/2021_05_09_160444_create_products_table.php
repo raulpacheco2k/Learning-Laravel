@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
             $table->text('stock')->nullable();
             $table->integer('price');
+            $table->text('image')->nullable();
             $table->timestamps();
         });
     }

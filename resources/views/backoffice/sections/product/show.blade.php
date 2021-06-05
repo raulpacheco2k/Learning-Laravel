@@ -86,6 +86,9 @@
                 <div class="col-xl-6">
                     <div class="row">
                         <div class="mb-3">
+                            @yield('image')
+                        </div>
+                        <div class="mb-3">
                             @yield('description')
                         </div>
                     </div>

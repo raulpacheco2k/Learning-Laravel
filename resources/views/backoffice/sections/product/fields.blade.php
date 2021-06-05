@@ -24,6 +24,11 @@
 
 @section('description')
     {{ Form::label('description', 'Descrição', ['class' => 'form-label'])  }}
-    {{ Form::textarea('description', $product->description ?? null, ['class' => 'form-control', 'rows' => '13', 'placeholder' => 'Descrição do produto', $disabled ?? null]) }}
+    {{ Form::textarea('description', $product->description ?? null, ['class' => 'form-control', 'rows' => '9', 'placeholder' => 'Descrição do produto', $disabled ?? null]) }}
     <x-validate-field field="description"/>
+@endsection
+
+@section('image')
+    {{ Form::label('image', 'Imagem', ['class' => 'form-label'])  }}
+    {{ Form::file('image', ['class' => 'form-control', $disabled ?? null, 'accept' => 'image/png' ]) }}
 @endsection
