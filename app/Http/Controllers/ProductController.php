@@ -6,7 +6,9 @@ use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use App\Repositories\Contracts\BrandRepositoryInterface;
 use App\Repositories\Contracts\ProductRepositoryInterface;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
@@ -14,9 +16,11 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param ProductRepositoryInterface $product
+     * @param BrandRepositoryInterface $brand
+     * @return View
      */
-    public function index(ProductRepositoryInterface $product, BrandRepositoryInterface $brand)
+    public function index(ProductRepositoryInterface $product, BrandRepositoryInterface $brand): View
     {
         $products = $product->all();
         $brands = $brand->all();
@@ -26,9 +30,10 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param BrandRepositoryInterface $model
+     * @return View
      */
-    public function create(BrandRepositoryInterface $model)
+    public function create(BrandRepositoryInterface $model): View
     {
         $brands = $model->all();
         return view('backoffice.sections.product.create')->with('brands', $brands);
@@ -37,10 +42,11 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
-     * @return \Illuminate\Http\Response
+     * @param ProductRequest $request
+     * @param ProductRepositoryInterface $model
+     * @return Redirector
      */
-    public function store(ProductRequest $request, ProductRepositoryInterface $model)
+    public function store(ProductRequest $request, ProductRepositoryInterface $model): Redirector
     {
         $product = new Product(
             [
@@ -62,10 +68,12 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Product $product
-     * @return \Illuminate\Http\Response
+     * @param ProductRepositoryInterface $product
+     * @param $id
+     * @param BrandRepositoryInterface $brands
+     * @return View
      */
-    public function show(ProductRepositoryInterface $product, $id, BrandRepositoryInterface $brands)
+    public function show(ProductRepositoryInterface $product, $id, BrandRepositoryInterface $brands): View
     {
         $product = $product->find($id);
         $brands = $brands->all();
@@ -76,10 +84,12 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Product $product
-     * @return \Illuminate\Http\Response
+     * @param ProductRepositoryInterface $product
+     * @param $id
+     * @param BrandRepositoryInterface $brand
+     * @return View
      */
-    public function edit(ProductRepositoryInterface $product, $id, BrandRepositoryInterface $brand)
+    public function edit(ProductRepositoryInterface $product, $id, BrandRepositoryInterface $brand): View
     {
         $product = $product->find($id);
         $brands = $brand->all();
@@ -91,10 +101,11 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param Product $product
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @param ProductRepositoryInterface $product
+     * @return Redirector
      */
-    public function update(Request $request, $id, ProductRepositoryInterface $product)
+    public function update(Request $request, $id, ProductRepositoryInterface $product): Redirector
     {
         $product = $product->find($id);
 
@@ -104,7 +115,11 @@ class ProductController extends Controller
         $product->brand_id = $request->get('brand_id');
         $product->stock = $request->get('stock');
         $product->price = $request->get('price');
-        $product->image = $request->file('image')->store('products');
+
+        if ($request->file('image')){
+            $product->image = $request->file('image')->store('products');
+        }
+
         $product->save();
 
         return redirect(route('products.index'));
@@ -113,10 +128,11 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Product $product
-     * @return \Illuminate\Http\Response
+     * @param ProductRepositoryInterface $product
+     * @param $id
+     * @return Redirector
      */
-    public function destroy(ProductRepositoryInterface $product, $id)
+    public function destroy(ProductRepositoryInterface $product, $id): Redirector
     {
         $product->delete($id);
         return redirect(route('products.index'));
