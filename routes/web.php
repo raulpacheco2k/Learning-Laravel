@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\ProductController;
-use \App\Http\Controllers\BrandController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +14,8 @@ use \App\Http\Controllers\BrandController;
 */
 
 Route::view('/', 'backoffice.layout.index')->name('base')->middleware('auth');
-Route::resource('/products', ProductController::class)->middleware('auth');
-Route::resource('/brands', BrandController::class)->middleware('auth');
+
+Route::prefix('brands')->group(base_path('routes/group/web/brand.php'));
+Route::prefix('products')->group(base_path('routes/group/web/products.php'));
+
 require __DIR__ . '/auth.php';
