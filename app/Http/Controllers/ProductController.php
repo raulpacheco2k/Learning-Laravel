@@ -6,47 +6,67 @@ use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use App\Repositories\Contracts\BrandRepositoryInterface;
 use App\Repositories\Contracts\ProductRepositoryInterface;
+use App\Repositories\Eloquent\BrandRepository;
+use App\Repositories\Eloquent\ProductRepository;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
+    private ProductRepositoryInterface $productRepository;
+    private BrandRepositoryInterface $brandRepository;
+
+    /**
+     * ProductController constructor.
+     *
+     * @param ProductRepository $productRepository
+     * @param BrandRepository $brandRepository
+     */
+    public function __construct(ProductRepository $productRepository, BrandRepository $brandRepository)
+    {
+        $this->productRepository = $productRepository;
+        $this->brandRepository = $brandRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
-     * @param ProductRepositoryInterface $product
-     * @param BrandRepositoryInterface $brand
      * @return View
      */
-    public function index(ProductRepositoryInterface $product, BrandRepositoryInterface $brand): View
+    public function index(): View
     {
-        $products = $product->all();
-        $brands = $brand->all();
-        return view('backoffice.sections.product.index')->with(['products' => $products, 'brands' => $brands]);
+        $products = $this->productRepository->all();
+        $brands = $this->brandRepository->all();
+
+        return view('backoffice.sections.product.index')->with([
+            'products' => $products,
+            'brands' => $brands
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @param BrandRepositoryInterface $model
      * @return View
      */
-    public function create(BrandRepositoryInterface $model): View
+    public function create(): View
     {
-        $brands = $model->all();
-        return view('backoffice.sections.product.create')->with('brands', $brands);
+        $brands = $this->brandRepository->all();
+        return view('backoffice.sections.product.create')->with([
+            'brands' => $brands
+        ]);
     }
 
+
     /**
-     * Store a newly created resource in storage.
-     *
      * @param ProductRequest $request
-     * @param ProductRepositoryInterface $model
-     * @return Redirector
+     * @return Application|RedirectResponse|Redirector
      */
-    public function store(ProductRequest $request, ProductRepositoryInterface $model): Redirector
+    public function store(ProductRequest $request): Redirector|RedirectResponse|Application
     {
         $product = new Product(
             [
@@ -60,7 +80,7 @@ class ProductController extends Controller
             ]
         );
 
-        $model->create($product);
+        $this->productRepository->create($product);
 
         return redirect(route('products.index'));
     }
@@ -68,46 +88,45 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param ProductRepositoryInterface $product
      * @param $id
-     * @param BrandRepositoryInterface $brands
      * @return View
      */
-    public function show(ProductRepositoryInterface $product, $id, BrandRepositoryInterface $brands): View
+    public function show($id): View
     {
-        $product = $product->find($id);
-        $brands = $brands->all();
+        $product = $this->productRepository->find($id);
+        $brands = $this->brandRepository->all();
 
-        return view('backoffice.sections.product.show')->with(['product' => $product, 'brands' => $brands]);
+        return view('backoffice.sections.product.show')->with([
+            'product' => $product,
+            'brands' => $brands
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param ProductRepositoryInterface $product
      * @param $id
-     * @param BrandRepositoryInterface $brand
      * @return View
      */
-    public function edit(ProductRepositoryInterface $product, $id, BrandRepositoryInterface $brand): View
+    public function edit($id): View
     {
-        $product = $product->find($id);
-        $brands = $brand->all();
+        $product = $this->productRepository->find($id);
+        $brands = $this->brandRepository->all();
 
-        return view('backoffice.sections.product.edit')->with(['product' => $product, 'brands' => $brands]);
+        return view('backoffice.sections.product.edit')->with([
+            'product' => $product,
+            'brands' => $brands
+        ]);
     }
 
     /**
-     * Update the specified resource in storage.
-     *
      * @param Request $request
      * @param $id
-     * @param ProductRepositoryInterface $product
-     * @return Redirector
+     * @return Application|RedirectResponse|Redirector
      */
-    public function update(Request $request, $id, ProductRepositoryInterface $product): Redirector
+    public function update(Request $request, $id): Redirector|RedirectResponse|Application
     {
-        $product = $product->find($id);
+        $product = $this->productRepository->find($id);
 
         $product->name = $request->get('name');
         $product->slug = Str::slug($request->get('name'));
@@ -126,15 +145,12 @@ class ProductController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param ProductRepositoryInterface $product
      * @param $id
-     * @return Redirector
+     * @return Application|RedirectResponse|Redirector
      */
-    public function destroy(ProductRepositoryInterface $product, $id): Redirector
+    public function destroy($id): Redirector|RedirectResponse|Application
     {
-        $product->delete($id);
+        $this->productRepository->delete($id);
         return redirect(route('products.index'));
     }
 }
