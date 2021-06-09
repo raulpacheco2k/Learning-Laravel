@@ -66,7 +66,7 @@ class BrandController extends Controller
         $brand = $this->repository->find($id);
 
         return view('backoffice.sections.brand.show')->with([
-            'brand', $brand
+            'brand' => $brand
         ]);
     }
 
