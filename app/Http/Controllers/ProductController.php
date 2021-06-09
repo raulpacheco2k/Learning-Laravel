@@ -120,8 +120,10 @@ class ProductController extends Controller
      * @param $id
      * @return Application|RedirectResponse|Redirector
      */
-    public function update(Request $request, $id): Redirector|RedirectResponse|Application
+    public function update(ProductRequest $request, $id): Redirector|RedirectResponse|Application
     {
+        $this->productService->saveImage($request);
+
         $this->productRepository->update($request->input(), $id);
 
         return redirect(route('products.index'));
