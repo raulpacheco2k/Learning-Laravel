@@ -20,18 +20,23 @@ abstract class AbstractRepository
         return $this->resolveModel()->all();
     }
 
-    public function find(int $id)
+    public function find(int $id): Model
     {
         return $this->resolveModel()->find($id);
     }
 
-    public function create(Model $object)
+    public function create(array $attributes): Model
     {
-        return $this->resolveModel()->create($object->toArray());
+        return $this->resolveModel()->create($attributes);
     }
 
-    public function delete(int $id)
+    public function update(array $attributes, $id): bool
     {
-        return $this->resolveModel()->find($id)->delete($id);
+        return $this->find($id)->update($attributes);
+    }
+
+    public function delete(int $id): void
+    {
+        $this->resolveModel()->find($id)->delete($id);
     }
 }

@@ -3,33 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
-use App\Models\Product;
 use App\Repositories\Contracts\BrandRepositoryInterface;
 use App\Repositories\Contracts\ProductRepositoryInterface;
 use App\Repositories\Eloquent\BrandRepository;
 use App\Repositories\Eloquent\ProductRepository;
+use App\Services\ProductService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
     private ProductRepositoryInterface $productRepository;
     private BrandRepositoryInterface $brandRepository;
+    private ProductService $productService;
 
     /**
      * ProductController constructor.
      *
      * @param ProductRepository $productRepository
      * @param BrandRepository $brandRepository
+     * @param ProductService $productService
      */
-    public function __construct(ProductRepository $productRepository, BrandRepository $brandRepository)
+    public function __construct(
+        ProductRepository $productRepository,
+        BrandRepository $brandRepository,
+        ProductService $productService)
     {
         $this->productRepository = $productRepository;
         $this->brandRepository = $brandRepository;
+        $this->productService = $productService;
     }
 
     /**
@@ -56,6 +61,7 @@ class ProductController extends Controller
     public function create(): View
     {
         $brands = $this->brandRepository->all();
+
         return view('backoffice.sections.product.create')->with([
             'brands' => $brands
         ]);
@@ -68,19 +74,9 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request): Redirector|RedirectResponse|Application
     {
-        $product = new Product(
-            [
-                'name' => $request->get('name'),
-                'slug' => Str::slug($request->get('name')),
-                'description' => $request->get('description'),
-                'brand_id' => $request->get('brand_id'),
-                'stock' => $request->get('stock'),
-                'price' => $request->get('price'),
-                'image' => $request->file('image')->store('products')
-            ]
-        );
+        $this->productService->saveImage($request);
 
-        $this->productRepository->create($product);
+        $this->productRepository->create($request->input());
 
         return redirect(route('products.index'));
     }
@@ -105,10 +101,10 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param $id
+     * @param int $id
      * @return View
      */
-    public function edit($id): View
+    public function edit(int $id): View
     {
         $product = $this->productRepository->find($id);
         $brands = $this->brandRepository->all();
@@ -126,20 +122,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id): Redirector|RedirectResponse|Application
     {
-        $product = $this->productRepository->find($id);
-
-        $product->name = $request->get('name');
-        $product->slug = Str::slug($request->get('name'));
-        $product->description = $request->get('description');
-        $product->brand_id = $request->get('brand_id');
-        $product->stock = $request->get('stock');
-        $product->price = $request->get('price');
-
-        if ($request->file('image')){
-            $product->image = $request->file('image')->store('products');
-        }
-
-        $product->save();
+        $this->productRepository->update($request->input(), $id);
 
         return redirect(route('products.index'));
     }
@@ -151,6 +134,7 @@ class ProductController extends Controller
     public function destroy($id): Redirector|RedirectResponse|Application
     {
         $this->productRepository->delete($id);
+
         return redirect(route('products.index'));
     }
 }

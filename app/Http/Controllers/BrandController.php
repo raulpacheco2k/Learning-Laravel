@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BrandRequest;
-use App\Models\Brand;
 use App\Repositories\Contracts\BrandRepositoryInterface;
 use App\Repositories\Eloquent\BrandRepository;
 use Illuminate\Contracts\Foundation\Application;
@@ -11,7 +10,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Str;
 
 class BrandController extends Controller
 {
@@ -30,6 +28,7 @@ class BrandController extends Controller
     protected function index(): View
     {
         $brands = $this->repository->all();
+
         return view('backoffice.sections.brand.index')->with('brands', $brands);
     }
 
@@ -51,15 +50,7 @@ class BrandController extends Controller
      */
     public function store(BrandRequest $request): Redirector|RedirectResponse|Application
     {
-        $brand = new Brand(
-            [
-                'name' => $request->get('name'),
-                'slug' => Str::slug($request->get('name')),
-                'description' => $request->get('description')
-            ]
-        );
-
-        $this->repository->create($brand);
+        $this->repository->create($request->input());
 
         return redirect(route('brands.index'));
     }
@@ -74,7 +65,9 @@ class BrandController extends Controller
     {
         $brand = $this->repository->find($id);
 
-        return view('backoffice.sections.brand.show')->with('brand', $brand);
+        return view('backoffice.sections.brand.show')->with([
+            'brand', $brand
+        ]);
     }
 
     /**
@@ -86,6 +79,7 @@ class BrandController extends Controller
     public function edit(int $id): View
     {
         $brand = $this->repository->find($id);
+
         return view('backoffice.sections.brand.edit')->with('brand', $brand);
     }
 
@@ -98,12 +92,7 @@ class BrandController extends Controller
      */
     public function update(Request $request, int $id): Redirector|RedirectResponse|Application
     {
-        $brand = $this->repository->find($id);
-
-        $brand->name = $request->name;
-        $brand->slug = Str::slug($request->slug);
-        $brand->description = $request->description;
-        $brand->save();
+        $this->repository->update($request->input(), $id);
 
         return redirect(route('brands.index'));
     }
