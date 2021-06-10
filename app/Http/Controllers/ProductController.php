@@ -16,8 +16,8 @@ use Illuminate\Routing\Redirector;
 
 class ProductController extends Controller
 {
-    private ProductRepositoryInterface $productRepository;
-    private BrandRepositoryInterface $brandRepository;
+    private ProductRepository $productRepository;
+    private BrandRepository $brandRepository;
     private ProductService $productService;
 
     /**

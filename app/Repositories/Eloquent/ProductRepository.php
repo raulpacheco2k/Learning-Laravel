@@ -1,15 +1,23 @@
 <?php
 
-
 namespace App\Repositories\Eloquent;
 
-
 use App\Models\Product;
-use App\Repositories\Contracts\ProductRepositoryInterface;
+use Prettus\Repository\Eloquent\BaseRepository;
 
-class ProductRepository extends AbstractRepository implements ProductRepositoryInterface
+/**
+ * Class ProductRepository.
+ *
+ * @package namespace App\Repositories\Eloquent;
+ */
+class ProductRepository extends BaseRepository
 {
-    public function model()
+    /**
+     * Specify Model class name
+     *
+     * @return string
+     */
+    public function model(): string
     {
         return Product::class;
     }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BrandRequest;
-use App\Repositories\Contracts\BrandRepositoryInterface;
 use App\Repositories\Eloquent\BrandRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\View;
@@ -13,7 +12,7 @@ use Illuminate\Routing\Redirector;
 
 class BrandController extends Controller
 {
-    private BrandRepositoryInterface $repository;
+    private BrandRepository $repository;
 
     public function __construct(BrandRepository $repository)
     {
