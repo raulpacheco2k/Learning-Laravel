@@ -3,7 +3,7 @@
 namespace App\Services;
 
 
-use App\Http\Requests\ProductRequest;
+use Modules\Products\Http\Requests\ProductRequest;
 
 class ProductService
 {

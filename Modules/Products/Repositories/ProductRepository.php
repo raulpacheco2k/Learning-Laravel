@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories\Eloquent;
+namespace Modules\Products\Repositories;
 
-use App\Models\Product;
+use Modules\Products\Models\Product;
 use Prettus\Repository\Eloquent\BaseRepository;
 
 /**

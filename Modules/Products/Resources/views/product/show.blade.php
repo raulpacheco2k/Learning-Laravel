@@ -1,5 +1,5 @@
 @extends('backoffice.layout.base')
-@include('backoffice.sections.product.fields', ['disabled' => 'disabled'])
+@include('products::product.fields', ['disabled' => 'disabled'])
 
 @section('title', 'Visualização de produto')
 

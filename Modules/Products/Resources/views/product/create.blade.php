@@ -1,5 +1,5 @@
 @extends('backoffice.layout.base')
-@include('backoffice.sections.product.fields')
+@include('products::product.fields')
 
 @section('title', 'Criação de produto')
 

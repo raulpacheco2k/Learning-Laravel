@@ -1,9 +1,9 @@
 <?php
 
-namespace Database\Factories;
+namespace Modules\Products\Database\Factories;
 
 use App\Models\Brand;
-use App\Models\Product;
+use Modules\Products\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 

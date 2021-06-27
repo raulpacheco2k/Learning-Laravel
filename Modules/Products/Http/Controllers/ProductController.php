@@ -1,36 +1,35 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\Products\Http\Controllers;
 
-use App\Http\Requests\ProductRequest;
-use App\Repositories\Contracts\BrandRepositoryInterface;
-use App\Repositories\Contracts\ProductRepositoryInterface;
+use App\Http\Controllers\Controller;
+use Modules\Products\Http\Requests\ProductRequest;
 use App\Repositories\Eloquent\BrandRepository;
-use App\Repositories\Eloquent\ProductRepository;
-use App\Services\ProductService;
+use App\Services\ImageService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Modules\Products\Repositories\ProductRepository;
+use Prettus\Validator\Exceptions\ValidatorException;
 
 class ProductController extends Controller
 {
     private ProductRepository $productRepository;
     private BrandRepository $brandRepository;
-    private ProductService $productService;
+    private ImageService $productService;
 
     /**
      * ProductController constructor.
      *
      * @param ProductRepository $productRepository
      * @param BrandRepository $brandRepository
-     * @param ProductService $productService
+     * @param ImageService $productService
      */
     public function __construct(
         ProductRepository $productRepository,
         BrandRepository $brandRepository,
-        ProductService $productService)
+        ImageService $productService)
     {
         $this->productRepository = $productRepository;
         $this->brandRepository = $brandRepository;
@@ -47,7 +46,7 @@ class ProductController extends Controller
         $products = $this->productRepository->all();
         $brands = $this->brandRepository->all();
 
-        return view('backoffice.sections.product.index')->with([
+        return view('products::product.index')->with([
             'products' => $products,
             'brands' => $brands
         ]);
@@ -62,7 +61,7 @@ class ProductController extends Controller
     {
         $brands = $this->brandRepository->all();
 
-        return view('backoffice.sections.product.create')->with([
+        return view('products::product.create')->with([
             'brands' => $brands
         ]);
     }
@@ -71,6 +70,7 @@ class ProductController extends Controller
     /**
      * @param ProductRequest $request
      * @return Application|RedirectResponse|Redirector
+     * @throws ValidatorException
      */
     public function store(ProductRequest $request): Redirector|RedirectResponse|Application
     {
@@ -92,7 +92,7 @@ class ProductController extends Controller
         $product = $this->productRepository->find($id);
         $brands = $this->brandRepository->all();
 
-        return view('backoffice.sections.product.show')->with([
+        return view('products::product.show')->with([
             'product' => $product,
             'brands' => $brands
         ]);
@@ -109,16 +109,17 @@ class ProductController extends Controller
         $product = $this->productRepository->find($id);
         $brands = $this->brandRepository->all();
 
-        return view('backoffice.sections.product.edit')->with([
+        return view('products::product.edit')->with([
             'product' => $product,
             'brands' => $brands
         ]);
     }
 
     /**
-     * @param Request $request
+     * @param ProductRequest $request
      * @param $id
      * @return Application|RedirectResponse|Redirector
+     * @throws ValidatorException
      */
     public function update(ProductRequest $request, $id): Redirector|RedirectResponse|Application
     {
