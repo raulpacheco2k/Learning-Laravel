@@ -3,11 +3,11 @@
 namespace App\Services;
 
 
-use Modules\Products\Http\Requests\ProductRequest;
+use Illuminate\Http\Request;
 
-class ProductService
+class ImageService
 {
-    public function saveImage(ProductRequest $request)
+    public function saveImage(Request $request)
     {
         if ($request->hasFile('image')) {
             $request->merge(['image' => $request->file('image')->store('products')]);
