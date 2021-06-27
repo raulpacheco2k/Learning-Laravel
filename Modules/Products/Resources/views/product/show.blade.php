@@ -6,7 +6,7 @@
 @section('submenu')
     <div class="row align-items-center">
         <div class="col">
-            <div class="page-pretitle">Dashboard > Produtos > Visualizar</div>
+            <div class="page-pretitle">Dashboard > {{ __('Products') }} > {{ __('View') }}</div>
             <h2 class="page-title">{{ substr($product->name, 0, 55) }}</h2>
         </div>
         <div class="col-auto ms-auto d-print-none">
@@ -19,7 +19,7 @@
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                             <path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1"/>
                         </svg>
-                        Voltar para listagem
+                        {{ __('Back to listing') }}
                     </a>
                     <a href="{{ route('products.index') }}" class="btn btn-light d-sm-none btn-icon"
                        aria-label="Create new report">
@@ -43,7 +43,7 @@
                             <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3"/>
                             <line x1="16" y1="5" x2="19" y2="8"/>
                         </svg>
-                        Editar produto
+                        {{ __('Edit product') }}
                     </a>
                     <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary d-sm-none btn-icon"
                        aria-label="Create new report">
@@ -97,8 +97,8 @@
         </div>
         <div class="card-footer text-end">
             <div class="d-flex">
-                <a href="{{route('products.index')}}" class="btn btn-link">Voltar para listagem</a>
-                <button type="submit" class="btn btn-primary ms-auto">Editar produto</button>
+                <a href="{{route('products.index')}}" class="btn btn-link">{{ __('Back to listing') }}</a>
+                <button type="submit" class="btn btn-primary ms-auto">{{ __('Edit product') }}</button>
             </div>
         </div>
         {{ Form::close() }}

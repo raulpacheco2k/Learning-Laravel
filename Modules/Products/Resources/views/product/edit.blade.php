@@ -6,7 +6,7 @@
 @section('submenu')
     <div class="row align-items-center">
         <div class="col">
-            <div class="page-pretitle">Dashboard > Produtos > Editar</div>
+            <div class="page-pretitle">Dashboard > {{ __('Products') }} > Editar</div>
             <h2 class="page-title">{{ substr($product->name, 0, 55) }}</h2>
         </div>
         <div class="col-auto ms-auto d-print-none">
@@ -19,7 +19,7 @@
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                             <path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1"/>
                         </svg>
-                        Voltar para listagem
+                        {{ __('Back to listing') }}
                     </a>
                     <a href="{{ route('products.index') }}" class="btn btn-light d-sm-none btn-icon"
                        aria-label="Create new report">
@@ -72,8 +72,8 @@
         </div>
         <div class="card-footer text-end">
             <div class="d-flex">
-                <a href="{{ route('products.index') }}" class="btn btn-link">Cancelar</a>
-                <button type="submit" class="btn btn-primary ms-auto">Salvar</button>
+                <a href="{{ route('products.index') }}" class="btn btn-link">{{ __('Cancel') }}</a>
+                <button type="submit" class="btn btn-primary ms-auto">{{ __('To save') }}</button>
             </div>
         </div>
         {{ Form::close() }}

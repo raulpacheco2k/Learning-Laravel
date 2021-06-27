@@ -102,7 +102,6 @@
             </div>
         </div>
 
-        @include('backoffice.layout.footer')
     </div>
 </div>
 </body>

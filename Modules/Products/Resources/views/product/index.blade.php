@@ -5,8 +5,8 @@
 @section('submenu')
     <div class="row align-items-center">
         <div class="col">
-            <div class="page-pretitle">Dashboard > Produtos</div>
-            <h2 class="page-title">Produtos</h2>
+            <div class="page-pretitle">{{ __('Dashboard') }} > {{ __('Products') }}</div>
+            <h2 class="page-title">{{ __('Products') }}</h2>
         </div>
         <div class="col-auto ms-auto d-print-none">
             <div class="btn-list">
@@ -18,7 +18,7 @@
                         <line x1="12" y1="5" x2="12" y2="19"></line>
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                     </svg>
-                    Criar produto
+                    {{ __('Create product') }}
                 </a>
                 <a href="{{ route('products.create') }}" class="btn btn-primary d-sm-none btn-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
@@ -41,9 +41,9 @@
                 <table class="table card-table table-vcenter text-nowrap datatable">
                     @if(count($products) == 0)
                         <div class="empty">
-                            <p class="empty-title">Nenhum resultado encontrado</p>
+                            <p class="empty-title">{{ __('No results found') }}</p>
                             <p class="empty-subtitle text-muted">
-                                Tente ajustar seu filtro para encontrar o que procura ou então crie um produto.
+                                {{ __('Try adjusting your filter to find what you\'re looking for, or create a product') }}
                             </p>
                             <div class="empty-action">
                                 <a href="{{ route('products.create') }}" class="btn btn-primary">
@@ -54,7 +54,7 @@
                                         <line x1="12" y1="5" x2="12" y2="19"></line>
                                         <line x1="5" y1="12" x2="19" y2="12"></line>
                                     </svg>
-                                    Criar produto
+                                    {{ __('Create product') }}
                                 </a>
                             </div>
                         </div>
@@ -65,9 +65,9 @@
                                 <input class="form-check-input m-0 align-middle" type="checkbox"
                                        aria-label="Select all invoices"></th>
                             <th>ID</th>
-                            <th>Nome</th>
-                            <th>Marca</th>
-                            <th>Preço</th>
+                            <th>{{ __('Name') }}</th>
+                            <th>{{ __('Brand') }}</th>
+                            <th>{{ __('Price') }}</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -90,16 +90,16 @@
                                 <td class="text-end">
                             <span class="dropdown">
                               <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport"
-                                      data-bs-toggle="dropdown">Ações</button>
+                                      data-bs-toggle="dropdown">{{ __('Actions') }}</button>
                               <div class="dropdown-menu dropdown-menu-end">
 
                                 <a class="dropdown-item" href="{{ route('products.show', $product) }}">
-                                  Visualizar
+                                  {{ __('View') }}
                                 </a>
                                   <form method="post" action="{{ route('products.destroy', $product) }}">
                                         @csrf
                                       @method('DELETE')
-                                      <button type="submit" class="dropdown-item">Deletar</button>
+                                      <button type="submit" class="dropdown-item">{{ __('Delete') }}</button>
                                   </form>
                               </div>
                             </span>
@@ -112,9 +112,7 @@
 
             </div>
             <div class="card-footer d-flex align-items-center">
-                <p class="m-0 text-muted">Mostrando de <span>1</span> a <span>8</span> de
-                    <span>{{count($products)}}</span>
-                </p>
+                <p class="m-0 text-muted">{{ __('Showing :exhibition to :total of', ['exhibition' => 0, 'total' => 3]) }} <span>{{count($products)}}</span></p>
                 <ul class="pagination m-0 ms-auto">
                     <li class="page-item disabled">
                         <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
@@ -124,7 +122,7 @@
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                 <polyline points="15 6 9 12 15 18"></polyline>
                             </svg>
-                            prev
+                            {{ __('Prev') }}
                         </a>
                     </li>
                     <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -134,7 +132,7 @@
                     <li class="page-item"><a class="page-link" href="#">5</a></li>
                     <li class="page-item">
                         <a class="page-link" href="#">
-                            next <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+                            {{ __('Next') }}
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                  stroke-linecap="round" stroke-linejoin="round">

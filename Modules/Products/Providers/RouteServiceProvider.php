@@ -4,6 +4,7 @@ namespace Modules\Products\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Modules\Products\Config\ProductsModule;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -13,6 +14,23 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $moduleNamespace = 'Modules\Products\Http\Controllers';
+
+    public function registerTranslations()
+    {
+        $module_path = ProductsModule::MODULE_NAME;
+        $module_slug = ProductsModule::MODULE_SLUG;
+
+        $langPath = resource_path('lang/modules/'. $module_slug);
+
+        if (is_dir($langPath)) {
+            $this->loadTranslationsFrom($langPath, $module_slug);
+            $this->loadJsonTranslationsFrom($langPath);
+        } else {
+            $this->loadTranslationsFrom(module_path($module_path, 'Resources/lang'), $module_slug);
+            $this->loadJsonTranslationsFrom(module_path($module_path, 'Resources/lang'));
+        }
+    }
+
 
     /**
      * Called before routes are registered.
@@ -33,6 +51,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
+        $this->registerTranslations();
+
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
