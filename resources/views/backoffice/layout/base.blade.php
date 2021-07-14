@@ -41,7 +41,7 @@
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
                     <ul class="navbar-nav">
-                        <li class="nav-item">
+                        <li class="nav-item {{ isActive('base') }}">
                             <a class="nav-link" href="{{ route('base') }}">
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                       <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
@@ -56,7 +56,7 @@
                     </span>
                             </a>
                         </li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown {{ isActive('products.index') }}">
                             <a style="outline:none" class="nav-link dropdown-toggle" href="#navbar-base"
                                data-bs-toggle="dropdown"
                                role="button" aria-expanded="false">
